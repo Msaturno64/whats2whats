@@ -28,7 +28,7 @@ const initWhatsApp = async (authDir, port, onMessage) => {
     const { state, saveCreds } = await useMultiFileAuthState(authDir);
     const sock = makeWASocket({
         auth: state,
-        printQRInTerminal: true
+        printQRInTerminal: false // Desactivar la impresión automática del QR en la terminal
     });
 
     sock.ev.on('creds.update', saveCreds);
@@ -38,6 +38,7 @@ const initWhatsApp = async (authDir, port, onMessage) => {
         if (qr) {
             console.log(`QR for ${authDir}:`);
             qrcode.generate(qr, { small: true }); // Imprime el QR en la terminal
+            console.log('----------------------------------------');
         }
         if (connection === 'close') {
             const shouldReconnect = (lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut);
@@ -367,6 +368,7 @@ const main = async () => {
 };
 
 main();
+
 
 
 
