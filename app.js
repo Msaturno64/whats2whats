@@ -113,7 +113,7 @@ const main = async () => {
         if (textMessage && !sender.endsWith('@g.us') && textMessage.match(/^\d+$/)) {
             const clientNumber = `${textMessage}@s.whatsapp.net`;
             if (!groupIds[clientNumber]) {
-                const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                const participants = ['']; // WhatsApp2
                 const groupName = textMessage; // Usar el número del cliente como nombre del grupo
                 groupIds[clientNumber] = await createGroup(sock1, groupName, participants);
                 saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -128,7 +128,7 @@ const main = async () => {
             if (clientNumber) {
                 const clientJid = `${clientNumber}@s.whatsapp.net`;
                 if (!groupIds[clientJid]) {
-                    const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                    const participants = ['']; // WhatsApp2
                     const groupName = clientNumber; // Usar el número del cliente como nombre del grupo
                     groupIds[clientJid] = await createGroup(sock1, groupName, participants);
                     saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -148,7 +148,7 @@ const main = async () => {
             // Si el mensaje es del cliente, enviarlo al grupo
             if (!sender.endsWith('@g.us')) {
                 if (!groupIds[sender]) {
-                    const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                    const participants = ['']; // WhatsApp2
                     const groupName = sender.split('@')[0]; // Usar el número del cliente como nombre del grupo
                     groupIds[sender] = await createGroup(sock1, groupName, participants);
                     saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -178,7 +178,7 @@ const main = async () => {
 
             if (!sender.endsWith('@g.us')) {
                 if (!groupIds[sender]) {
-                    const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                    const participants = ['']; // WhatsApp2
                     const groupName = sender.split('@')[0]; // Usar el número del cliente como nombre del grupo
                     groupIds[sender] = await createGroup(sock1, groupName, participants);
                     saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -209,7 +209,7 @@ const main = async () => {
 
             if (!sender.endsWith('@g.us')) {
                 if (!groupIds[sender]) {
-                    const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                    const participants = ['']; // WhatsApp2
                     const groupName = sender.split('@')[0]; // Usar el número del cliente como nombre del grupo
                     groupIds[sender] = await createGroup(sock1, groupName, participants);
                     saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -240,7 +240,7 @@ const main = async () => {
 
             if (!sender.endsWith('@g.us')) {
                 if (!groupIds[sender]) {
-                    const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                    const participants = ['']; // WhatsApp2
                     const groupName = sender.split('@')[0]; // Usar el número del cliente como nombre del grupo
                     groupIds[sender] = await createGroup(sock1, groupName, participants);
                     saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -267,7 +267,7 @@ const main = async () => {
             console.log(`Received message from ${sender}: ${textMessage}`);
 
             if (!groupIds[sender]) {
-                const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                const participants = ['']; // WhatsApp2
                 const groupName = sender.split('@')[0]; // Usar el número del cliente como nombre del grupo
                 groupIds[sender] = await createGroup(sock1, groupName, participants);
                 saveGroupIds(); // Guardar cambios después de crear el grupo
@@ -300,7 +300,7 @@ const main = async () => {
             const audioBuffer = await fs.promises.readFile(mp4Path);
 
             // Si el mensaje es del grupo, enviarlo al cliente
-            if (sender.endsWith('@g.us') && msg.key.participant === '5493541634611@s.whatsapp.net') {
+            if (sender.endsWith('@g.us') && msg.key.participant === '') {
                 const clientJid = Object.keys(groupIds).find(key => groupIds[key] === sender);
                 if (clientJid) {
                     await sendMessageToClient(sock1, clientJid, {
@@ -323,7 +323,7 @@ const main = async () => {
 
             const imageBuffer = await fs.promises.readFile(imagePath);
 
-            if (sender.endsWith('@g.us') && msg.key.participant === '5493541634611@s.whatsapp.net') {
+            if (sender.endsWith('@g.us') && msg.key.participant === '') {
                 const clientJid = Object.keys(groupIds).find(key => groupIds[key] === sender);
                 if (clientJid) {
                     await sendMessageToClient(sock1, clientJid, {
@@ -347,7 +347,7 @@ const main = async () => {
 
             const videoBuffer = await fs.promises.readFile(videoPath);
 
-            if (sender.endsWith('@g.us') && msg.key.participant === '5493541634611@s.whatsapp.net') {
+            if (sender.endsWith('@g.us') && msg.key.participant === '') {
                 const clientJid = Object.keys(groupIds).find(key => groupIds[key] === sender);
                 if (clientJid) {
                     await sendMessageToClient(sock1, clientJid, {
@@ -371,7 +371,7 @@ const main = async () => {
 
             const documentBuffer = await fs.promises.readFile(documentPath);
 
-            if (sender.endsWith('@g.us') && msg.key.participant === '5493541634611@s.whatsapp.net') {
+            if (sender.endsWith('@g.us') && msg.key.participant === '') {
                 const clientJid = Object.keys(groupIds).find(key => groupIds[key] === sender);
                 if (clientJid) {
                     await sendMessageToClient(sock1, clientJid, {
@@ -389,7 +389,7 @@ const main = async () => {
             await fs.promises.unlink(documentPath).catch(error => console.error(`Error deleting file: ${error}`));
         }
 
-        if (textMessage && sender.endsWith('@g.us') && msg.key.participant === '5493541634611@s.whatsapp.net') {
+        if (textMessage && sender.endsWith('@g.us') && msg.key.participant === '') {
             console.log(`Received message in group ${sender}: ${textMessage}`);
             const clientJid = Object.keys(groupIds).find(key => groupIds[key] === sender);
             if (clientJid) {
