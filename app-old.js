@@ -85,7 +85,7 @@ const main = async () => {
             console.log(`Received message from ${sender}: ${textMessage}`);
 
             if (!groupIds[sender]) {
-                const participants = ['5493541634611@s.whatsapp.net']; // WhatsApp2
+                const participants = ['']; // WhatsApp2
                 const groupName = sender.split('@')[0]; // Usar el número del cliente como nombre del grupo
                 groupIds[sender] = await createGroup(sock1, groupName, participants);
                 console.log(`Group ID stored for ${sender}: ${groupIds[sender]}`);
@@ -110,7 +110,7 @@ const main = async () => {
         const sender = msg.key.remoteJid;
 
         // Verificar si el mensaje es del grupo y enviado por WhatsApp2
-        if (textMessage && sender.endsWith('@g.us') && msg.key.participant === '5493541634611@s.whatsapp.net') {
+        if (textMessage && sender.endsWith('@g.us') && msg.key.participant === '') {
             console.log(`Received message in group ${sender}: ${textMessage}`);
             const clientJid = Object.keys(groupIds).find(key => groupIds[key] === sender);
             if (clientJid) {
